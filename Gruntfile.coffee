@@ -1,9 +1,18 @@
 module.exports = (grunt)->
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
+    watch:
+      compile:
+        tasks: ['compile']
+        files: ['js/**/*.coffee', 'css/**/*.scss', '**/*.html']
     clean:
-      build: ['./build']
+      compile: ['./build']
       dist:  ['./dist' ]
+    copy:
+      compile:
+        html:
+          src: '*.html'
+          dest: './build/'
     sass:
       dist:
         options:
@@ -44,9 +53,12 @@ module.exports = (grunt)->
           ext: '.js'
         }]
 
+  grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-clean'
+  grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-sass'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
 
-  grunt.registerTask 'default', ['clean:build', 'coffee:compile', 'sass:compile']
+  grunt.registerTask 'default', ['watch:compile']
+  grunt.registerTask 'compile', ['clean:compile', 'coffee:compile', 'sass:compile', 'copy:compile' ]
