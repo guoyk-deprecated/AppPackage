@@ -2,17 +2,25 @@ module.exports = (grunt)->
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
     watch:
-      compile:
-        tasks: ['compile']
+      build:
+        tasks: ['build']
         files: ['js/**/*.coffee', 'css/**/*.scss', '**/*.html']
     clean:
-      compile: ['./build']
+      build: ['./build']
       dist:  ['./dist' ]
     copy:
-      compile:
-        html:
+      build:
+        files: [{
+          expand: true
+          cwd: './'
           src: '*.html'
           dest: './build/'
+        }, {
+          expand: true
+          flatten: true
+          src: 'bower_components/jquery/dist/jquery.js'
+          dest: './build/js/'
+        }]
     sass:
       dist:
         options:
@@ -24,7 +32,7 @@ module.exports = (grunt)->
           dest: './dist/css/'
           ext: '.css'
         }]
-      compile:
+      build:
         options:
           style: 'expanded'
         files: [{
@@ -44,7 +52,7 @@ module.exports = (grunt)->
           ext: '.js'
         }]
     coffee:
-      compile:
+      build:
         files: [{
           expand: true
           cwd: 'js/'
@@ -60,5 +68,5 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-sass'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
 
-  grunt.registerTask 'default', ['watch:compile']
-  grunt.registerTask 'compile', ['clean:compile', 'coffee:compile', 'sass:compile', 'copy:compile' ]
+  grunt.registerTask 'default', [ 'build', 'watch:build' ]
+  grunt.registerTask 'build', [ 'clean:build', 'coffee:build', 'sass:build', 'copy:build' ]
