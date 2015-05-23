@@ -2,7 +2,7 @@
   "name": "ymxian_app_www",
   "private": "true",
   "version": "1.0.0",
-  "main":"index.html",
+  "main": "index.html",
   "description": "YMXian App WWW conponents",
   "author": "YANKE Guo <me@yanke.io>",
   "license": "Copyright",

@@ -4,7 +4,7 @@ module.exports = (grunt)->
     watch:
       build:
         tasks: ['build']
-        files: ['js/**/*.coffee', 'css/**/*.scss', '**/*.html']
+        files: ['js/**/*.coffee', 'css/**/*.scss', '*.html']
     clean:
       build: ['./build']
       dist:  ['./dist' ]
@@ -18,20 +18,14 @@ module.exports = (grunt)->
           dest: './build/'
         }, {
           # AngularJS
-          expand: true
-          flatten: true
           src: 'bower_components/angular/angular.js'
           dest: './build/vendor/angular-1.3.15/js/angular.js'
         }, {
           # Angular Bootstrap
-          expand: true
-          flatten: true
           src: 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
           dest: './build/vendor/angular-bootstrap-0.13.0/js/ui-bootstrap-tpls.js'
         }, {
           # Bootstrap CSS
-          expand: true
-          flatten: true
           src: 'bower_components/bootstrap/dist/css/bootstrap.css'
           dest: './build/vendor/bootstrap-3.1.1/css/bootstrap.css'
         }, {

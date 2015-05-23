@@ -1,2 +1,1 @@
-module.exports = (wat)->
-  console.log 'a'
+@app = angular.module 'app', []
