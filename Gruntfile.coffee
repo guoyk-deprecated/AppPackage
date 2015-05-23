@@ -52,6 +52,17 @@ module.exports = (grunt)->
           src: 'bower_components/bootstrap/dist/fonts/*'
           dest: 'build/vendor/bootstrap-3.1.1/fonts/'
         }]
+    htmlmin:
+      dist:
+        options:
+          removeComments: true
+          collapseWhitespace: true
+        files:[{
+          expand: true
+          cwd: 'dist'
+          src: ['**/*.html']
+          dest:'dist'
+        }]
     cssmin:
       dist:
         files:[{
@@ -97,6 +108,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-sass'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
+  grunt.loadNpmTasks 'grunt-contrib-htmlmin'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-filerev'
 
@@ -113,5 +125,6 @@ module.exports = (grunt)->
     'copy:dist'   # copy    build/**/*      -> dist/**/*
     'uglify:dist' # dist    dist/**/*.js    -> dist/**/*.js
     'cssmin:dist' # dist    dist/**/*.css   -> dist/**/*.css
-    'filerev:dist'# rename  dist/css, dist/js
+    'htmlmin:dist'# dist    dist/**/*.html  -> dist/**/*.html
+    'filerev:dist'# rename  dist/css/**/*.css, dist/js/**/*.js, dist/**/*.html
   ]
