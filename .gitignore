@@ -1,0 +1,15 @@
+# coffee file
+/js/**/*.js
+
+# dist file
+dist/
+build/
+
+# bower files
+bower_components/
+
+# node.js modules
+node_modules/
+
+# sass cache
+.sass-cache/
