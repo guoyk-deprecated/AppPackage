@@ -27,7 +27,7 @@ module.exports = (grunt)->
           # HTML
           expand: true
           cwd: ''
-          src: '*.html'
+          src: '**/*.html'
           dest: 'build/'
         }, {
           # AngularJS
@@ -112,6 +112,10 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-filerev'
 
+  grunt.registerTask 'manifest', 'create manifest.json and save to dist/', ()->
+    done = @async()
+    process.nextTick(done)
+
   grunt.registerTask 'default', [ 'build', 'watch:build' ]
   grunt.registerTask 'build', [
     'clean:build'
@@ -127,4 +131,5 @@ module.exports = (grunt)->
     'cssmin:dist' # dist    dist/**/*.css   -> dist/**/*.css
     'htmlmin:dist'# dist    dist/**/*.html  -> dist/**/*.html
     'filerev:dist'# rename  dist/css/**/*.css, dist/js/**/*.js, dist/**/*.html
+    'manifest'    # create  app.json
   ]
