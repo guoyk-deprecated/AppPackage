@@ -3,8 +3,8 @@ path         = require 'path'
 fs           = require 'fs'
 walk         = require 'recursive-readdir'
 
-bowerResolver= require './lib/bower_resolver'
 config       = require './config'
+bowerResolver= require './lib/bower_resolver'
 
 module.exports = (grunt)->
   grunt.initConfig
@@ -43,29 +43,7 @@ module.exports = (grunt)->
           cwd: 'src'
           src: '**/*.html'
           dest: 'build/'
-        }, {
-          # AngularJS
-          src: 'bower_components/angular/angular.js'
-          dest: 'build/vendor/angular-1.3.15/js/angular.js'
-        }, {
-          # Angular Bootstrap
-          src: 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
-          dest: 'build/vendor/angular-bootstrap-0.13.0/js/ui-bootstrap-tpls.js'
-        }, {
-          # ngCordova
-          src: 'bower_components/ngCordova/dist/ng-cordova.js'
-          dest: 'build/vendor/ng-cordova-0.1.15/js/ng-cordova.js'
-        }, {
-          # Bootstrap CSS
-          src: 'bower_components/bootstrap/dist/css/bootstrap.css'
-          dest: 'build/vendor/bootstrap-3.1.1/css/bootstrap.css'
-        }, {
-          # Bootstrap Fonts
-          expand: true
-          flatten: true
-          src: 'bower_components/bootstrap/dist/fonts/*'
-          dest: 'build/vendor/bootstrap-3.1.1/fonts/'
-        }]
+        }].concat(bowerResolver(grunt, config.bower, 'build/vendor'))
     htmlmin:
       dist:
         options:

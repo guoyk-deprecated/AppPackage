@@ -10,14 +10,14 @@ module.exports =
     platformFiles:
       "cordova-3.8.js":"js/cordova-3.8.js"
   bower:
-    root: __dirname + '/bower_components/'
+    root: 'bower_components'
     libs:
       angular:
         js:   'angular.js'
       'angular-bootstrap':
         js:   'ui-bootstrap-tpls.js'
       bootstrap:
-        css:  'dist/bootstrap.css'
-        fonts:'dist/fonts/**/*'
+        css:  'dist/css/bootstrap.css'
+        fonts:'dist/fonts/*'
       ngCordova:
-        js:  'ng-cordova.js'
+        js:  'dist/ng-cordova.js'
