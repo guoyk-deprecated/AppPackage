@@ -11,14 +11,16 @@ module.exports = (grunt)->
     copy:
       build:
         files: [{
+          # HTML
           expand: true
           cwd: './'
           src: '*.html'
           dest: './build/'
         }, {
+          # AngularJS
           expand: true
           flatten: true
-          src: 'bower_components/jquery/dist/jquery.js'
+          src: 'bower_components/angularjs/angular.js'
           dest: './build/js/'
         }]
     sass:
