@@ -7,6 +7,12 @@ AppPacket is a template to package h5 app into a standardlized format.
 
 All filenames should be downcased
 
+HTML files should be at top level only
+
+make file structure as flatten as possible
+
+NO file rev for vendored libs, use version in path instead
+
 ### manifest.json
 
 ```json

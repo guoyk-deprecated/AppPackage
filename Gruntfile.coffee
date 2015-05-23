@@ -9,16 +9,22 @@ config       = require './config'
 module.exports = (grunt)->
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
+    filerev_replace:
+      dist:
+        options:
+          assets_root: 'dist'
+          views_root:  'dist'
+        src: 'dist/**/*.html'
     filerev:
       options:
         algorithm: 'md5'
         length: 8
       dist:
-        src: ['dist/js/**/*.js', 'dist/css/**/*.css', 'dist/**/*.html', 'dist/img/**/*']
+        src: ['dist/**/*', '!dist/vendor/**/*']
     watch:
       build:
         tasks: ['build']
-        files: ['js/**/*.coffee', 'css/**/*.scss', '*.html']
+        files: ['src/**/*']
     clean:
       build: ['build/*']
       dist:  ['dist/*' ]
@@ -34,8 +40,8 @@ module.exports = (grunt)->
         files: [{
           # HTML
           expand: true
-          cwd: ''
-          src: '*.html'
+          cwd: 'src'
+          src: '**/*.html'
           dest: 'build/'
         }, {
           # AngularJS
@@ -68,7 +74,7 @@ module.exports = (grunt)->
         files:[{
           expand: true
           cwd: 'dist'
-          src: ['*.html']
+          src: ['**/*.html']
           dest:'dist'
         }]
     cssmin:
@@ -86,27 +92,27 @@ module.exports = (grunt)->
           style: 'expanded'
         files: [{
           expand: true
-          cwd: 'css'
-          src: ['*.scss']
-          dest: 'build/css/'
+          cwd: 'src'
+          src: ['**/*.scss']
+          dest: 'build'
           ext: '.css'
         }]
     uglify:
       dist:
         files: [{
           expand: true
-          cwd: 'dist/'
+          cwd: 'dist'
           src: ['**/*.js']
-          dest: 'dist/'
+          dest: 'dist'
           ext: '.js'
         }]
     coffee:
       build:
         files: [{
           expand: true
-          cwd: 'js/'
-          src: ['*.coffee']
-          dest: 'build/js/'
+          cwd: 'src'
+          src: ['**/*.coffee']
+          dest: 'build'
           ext: '.js'
         }]
 
@@ -119,6 +125,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-htmlmin'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-filerev'
+  grunt.loadNpmTasks 'grunt-filerev-replace'
 
   grunt.registerTask 'manifest', 'create manifest.json and save to dist/', ()->
     # Go async
@@ -163,5 +170,6 @@ module.exports = (grunt)->
     'cssmin:dist' # dist    dist/**/*.css   -> dist/**/*.css
     'htmlmin:dist'# dist    dist/**/*.html  -> dist/**/*.html
     'filerev:dist'# rename  dist/css/**/*.css, dist/js/**/*.js, dist/**/*.html
+    'filerev_replace:dist'# rename  dist/css/**/*.css, dist/js/**/*.js, dist/**/*.html
     'manifest'    # create  manifest.json
   ]
