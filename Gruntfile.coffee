@@ -20,8 +20,26 @@ module.exports = (grunt)->
           # AngularJS
           expand: true
           flatten: true
-          src: 'bower_components/angularjs/angular.js'
-          dest: './build/js/'
+          src: 'bower_components/angular/angular.js'
+          dest: './build/vendor/angular-1.3.15/js/angular.js'
+        }, {
+          # Angular Bootstrap
+          expand: true
+          flatten: true
+          src: 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+          dest: './build/vendor/angular-bootstrap-0.13.0/js/ui-bootstrap-tpls.js'
+        }, {
+          # Bootstrap CSS
+          expand: true
+          flatten: true
+          src: 'bower_components/bootstrap/dist/css/bootstrap.css'
+          dest: './build/vendor/bootstrap-3.1.1/css/bootstrap.css'
+        }, {
+          # Bootstrap Fonts
+          expand: true
+          flatten: true
+          src: 'bower_components/bootstrap/dist/fonts/*'
+          dest: './build/vendor/bootstrap-3.1.1/fonts/'
         }]
     sass:
       dist:
