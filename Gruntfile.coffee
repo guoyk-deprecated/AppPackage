@@ -1,3 +1,11 @@
+_            = require 'lodash'
+path         = require 'path'
+fs           = require 'fs'
+walk         = require 'recursive-readdir'
+
+bowerResolver= require './lib/bower_resolver'
+config       = require './config'
+
 module.exports = (grunt)->
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
@@ -27,7 +35,7 @@ module.exports = (grunt)->
           # HTML
           expand: true
           cwd: ''
-          src: '**/*.html'
+          src: '*.html'
           dest: 'build/'
         }, {
           # AngularJS
@@ -60,7 +68,7 @@ module.exports = (grunt)->
         files:[{
           expand: true
           cwd: 'dist'
-          src: ['**/*.html']
+          src: ['*.html']
           dest:'dist'
         }]
     cssmin:
@@ -113,10 +121,34 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-filerev'
 
   grunt.registerTask 'manifest', 'create manifest.json and save to dist/', ()->
+    # Go async
     done = @async()
-    process.nextTick(done)
+    # chdir
+    process.chdir 'dist'
+    # get cfg, fileRev, mainRev
+    cfg     = config.manifest
+    fileRev = (grunt.filerev or {}).summary or {}
+    mainRev = fileRev["dist/#{cfg.main}"]
+    # manifest object
+    manifest=
+      version:  cfg.version
+      main:     if mainRev then path.basename(mainRev) else cfg.main
+      platform: cfg.platform
+      downloadBaseUrl: cfg.downloadBaseUrl
+      nextCheckAt: (new Date((Date.now() + (1000 * 3600 * 24 * parseInt(cfg.expire))))).toISOString()
+      platformFiles: cfg.platformFiles
+    walk "./", (err, files)->
+      if err
+        process.chdir '../'
+        done err
+      else
+        manifest.files = files
+        grunt.file.write 'manifest.json', JSON.stringify(manifest, null, ' ')
+        process.chdir '../'
+        done()
 
   grunt.registerTask 'default', [ 'build', 'watch:build' ]
+
   grunt.registerTask 'build', [
     'clean:build'
     'coffee:build'
@@ -131,5 +163,5 @@ module.exports = (grunt)->
     'cssmin:dist' # dist    dist/**/*.css   -> dist/**/*.css
     'htmlmin:dist'# dist    dist/**/*.html  -> dist/**/*.html
     'filerev:dist'# rename  dist/css/**/*.css, dist/js/**/*.js, dist/**/*.html
-    'manifest'    # create  app.json
+    'manifest'    # create  manifest.json
   ]

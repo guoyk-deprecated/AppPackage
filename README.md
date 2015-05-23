@@ -3,17 +3,21 @@ AppPackage
 
 AppPacket is a template to package h5 app into a standardlized format.
 
+### Warnning
+
+All filenames should be downcased
+
 ### manifest.json
 
 ```json
 {
   "version":"1.0.0",                                          // current version
   "platform": {                                               // Supported platform version
-    "YMXianiOS":">= 1.3.0",
-    "YMXianAndroid":">= 1.2.1"
+    "YMXianiOS":"1.3.0",
+    "YMXianAndroid":"1.2.1"
   },
   "main":"index.12hdnbt.html",                                // main html file
-  "nextCheckAt":"2015-05-30 10:00:00",                        // nextCheckAt for better performance, 10d max
+  "nextCheckAt":"1970-01-17T14:07:49.840Z",                   // nextCheckAt for better performance, 10d max
   "downloadBaseUrl":"http://what.s3.amazonaws.com/dsafasdf/", // Base url for download and sync
   "files":[                                                   // files can be downloaded from downloadBaseUrl
     "index.12hdnbt.html",

@@ -2,7 +2,6 @@
   "name": "ymxian_app_www",
   "private": "true",
   "version": "1.0.0",
-  "main": "index.html",
   "description": "YMXian App WWW conponents",
   "author": "YANKE Guo <me@yanke.io>",
   "license": "Copyright",
@@ -17,5 +16,9 @@
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-filerev": "^2.3.1"
+  },
+  "dependencies": {
+    "lodash": "^3.9.1",
+    "recursive-readdir": "^1.2.1"
   }
 }
