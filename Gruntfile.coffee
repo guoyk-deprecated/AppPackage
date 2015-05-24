@@ -14,13 +14,13 @@ module.exports = (grunt)->
         options:
           assets_root: 'dist'
           views_root:  'dist'
-        src: 'dist/**/*.html'
+        src: ['dist/**/*.html', 'dist/**/*.css']
     filerev:
       options:
         algorithm: 'md5'
         length: 8
       dist:
-        src: ['dist/**/*', '!dist/vendor/**/*']
+        src: ['dist/**/*']
     watch:
       build:
         tasks: ['build']
@@ -42,7 +42,7 @@ module.exports = (grunt)->
           expand: true
           cwd: 'src'
           src: '**/*.html'
-          dest: 'build/'
+          dest: 'build'
         }].concat(bowerResolver(grunt, config.bower, 'build/vendor'))
     htmlmin:
       dist:
@@ -52,7 +52,7 @@ module.exports = (grunt)->
         files:[{
           expand: true
           cwd: 'dist'
-          src: ['**/*.html']
+          src: ['**/*.html', '!vendor/**/*']
           dest:'dist'
         }]
     cssmin:
@@ -60,7 +60,7 @@ module.exports = (grunt)->
         files:[{
           expand: true
           cwd: 'dist'
-          src: ['**/*.css']
+          src: ['**/*.css','!vendor/**/*']
           dest: 'dist'
           ext: '.css'
         }]
@@ -80,7 +80,7 @@ module.exports = (grunt)->
         files: [{
           expand: true
           cwd: 'dist'
-          src: ['**/*.js']
+          src: ['**/*.js', '!vendor/**/*']
           dest: 'dist'
           ext: '.js'
         }]

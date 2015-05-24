@@ -13,11 +13,11 @@ module.exports =
     root: 'bower_components'
     libs:
       angular:
-        js:   'angular.js'
+        js:   'angular.min.js'
       'angular-bootstrap':
-        js:   'ui-bootstrap-tpls.js'
+        js:   'ui-bootstrap-tpls.min.js'
       bootstrap:
-        css:  'dist/css/bootstrap.css'
+        css:  'dist/css/bootstrap.min.css'
         fonts:'dist/fonts/*'
       ngCordova:
-        js:  'dist/ng-cordova.js'
+        js:  'dist/ng-cordova.min.js'

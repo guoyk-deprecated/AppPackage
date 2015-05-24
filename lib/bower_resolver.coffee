@@ -13,9 +13,9 @@ module.exports = (grunt, config, tgtpath)->
           expand: true
           flatten: true
           src: "#{config.root}/#{name}/#{path}"
-          dest:"#{tgtpath}/#{lname}-#{bowerVer}/#{folder}/"
+          dest:"#{tgtpath}/#{folder}/"
       else
         result.push
           src: "#{config.root}/#{name}/#{path}"
-          dest:"#{tgtpath}/#{lname}-#{bowerVer}/#{folder}/#{pathModule.basename(path)}"
+          dest:"#{tgtpath}/#{folder}/#{pathModule.basename(path)}"
   result
