@@ -3,6 +3,16 @@ AppPackage
 
 AppPacket is a template to package h5 app into a standardlized format.
 
+### Start
+
+install `node`
+
+`sudo npm install -g grunt-cli`
+`sudo npm install -g bower`
+`npm install`
+`bower install`
+`grunt`
+
 ### Warnning
 
 All filenames should be downcased
